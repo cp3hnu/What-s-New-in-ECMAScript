@@ -60,3 +60,9 @@ export class SubCounter extends Counter {
   #privateField = 120;
   publicField = 110;
 }
+
+export function logCharCode(str) {
+  for (let i = 0; i < str.length; ++i) {
+    console.log(str.charCodeAt(i).toString(16))
+  }
+}

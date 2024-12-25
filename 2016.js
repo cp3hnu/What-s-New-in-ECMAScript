@@ -5,7 +5,6 @@ const pets = ['cat', 'dog', 'bat']
 console.log(pets.includes('cat'))
 console.log(pets.includes('at'))
 
-
 console.log('**Exponentiation**')
 console.log(2 ** 2)
 console.log(2 ** 10)

@@ -5,5 +5,4 @@ const promise = new Promise(resolve => {
 })
 
 const data = await promise;
-console.log('awaiting.js')
 export default data;
