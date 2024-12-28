@@ -1,6 +1,6 @@
 import { defineConfig } from '@umijs/max';
 
-const publicPath =
+const base =
   process.env.NODE_ENV === 'production' ? '/What-s-New-in-ECMAScript/' : '/';
 
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
   layout: {
     title: `What's New in ES`,
   },
-  publicPath: publicPath,
+  base: base,
   routes: [
     {
       path: '/',
@@ -37,10 +37,10 @@ export default defineConfig({
   npmClient: 'pnpm',
   headScripts: [
     {
-      src: `${publicPath}js/2016.js`,
+      src: `${base}js/2016.js`,
     },
     {
-      src: `${publicPath}js/2024.js`,
+      src: `${base}js/2024.js`,
     },
   ],
   proxy: {
