@@ -12,6 +12,7 @@ export default defineConfig({
   layout: {
     title: `What's New in ES`,
   },
+  publicPath: '/What-s-New-in-ECMAScript/',
   routes: [
     {
       path: '/',
