@@ -13,6 +13,7 @@ export default defineConfig({
     title: `What's New in ES`,
   },
   base: base,
+  publicPath: base,
   routes: [
     {
       path: '/',
