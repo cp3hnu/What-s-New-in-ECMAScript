@@ -29,13 +29,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4 # docs https://pnpm.io/continuous-integration#github-actions
+        with:
+          version: 8
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: pnpm # 或 pnpm / yarn
-      - name: Install pnpm
-        run: npm install -g pnpm
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
