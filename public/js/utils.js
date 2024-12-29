@@ -4,22 +4,6 @@ export async function sleep(delay) {
   })
 }
 
-export function flat(array) {
-  const flatArray = []
-  function recursionFlat(item) {
-    if (Array.isArray(item)) {
-      for (const i of item) {
-        recursionFlat(i)
-      }
-    } else {
-      flatArray.push(item)
-    }
-  }
-  recursionFlat(array)
-  return flatArray
-}
-
-
 export class Counter {
   publicField = 10;
   static publicStaticField = 'static field';
@@ -59,10 +43,4 @@ export class Counter {
 export class SubCounter extends Counter {
   #privateField = 120;
   publicField = 110;
-}
-
-export function logCharCode(str) {
-  for (let i = 0; i < str.length; ++i) {
-    console.log(str.charCodeAt(i).toString(16))
-  }
 }

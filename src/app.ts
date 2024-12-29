@@ -1,6 +1,4 @@
 // 运行时配置
-
-// export { requestConfig as request } from './requestConfig';
 import logo from '@/assets/logo.png';
 import { RuntimeConfig } from '@umijs/max';
 

@@ -1,25 +1,27 @@
 const logs: any[] = [];
-
 const originalLog = console.log;
-
 console.log = function (...args) {
   logs.push(args.map(formatLog).join(' '));
   originalLog.apply(console, args);
 };
 
-function displayLogs() {
+// 显示日志
+export function displayLogs() {
   return logs.map((log) => '> ' + log).join('\n');
 }
 
+// 格式化日志
 function formatLog(log: any): string {
-  if (Array.isArray(log)) {
-    return JSON.stringify(log, null, 2);
-  } else if (typeof log === 'object') {
-    return JSON.stringify(log, null, 2);
+  if (typeof log === 'object') {
+    return JSON.stringify(log, null, 2)
+      .split('\n')
+      .map((line, index) => (index === 0 ? '' : '  ') + line)
+      .join('\n');
   }
   return String(log);
 }
 
+// 执行代码
 export function executeCode(code: string) {
   logs.length = 0;
   try {

@@ -25,6 +25,7 @@ function wellFormedString() {
     }
   }
 
+  // lone surrogates 替换成 `U+FFFD` 字符
   logCharCode(strings[0]);
   logCharCode(strings[0].toWellFormed());
 }
@@ -52,7 +53,7 @@ function groupBy() {
   console.log(result2.get(restock));
 }
 
-function regexpWithVFlag() {
+function regExpWithVFlag() {
   const re1 = /^\p{Emoji}$/u;
   console.log(re1.test('⚽')); // '\u26BD'
   // true
@@ -65,9 +66,17 @@ function regexpWithVFlag() {
   console.log(re2.test('👨🏾')); // '\u{1F468}\u{1F3FE}\u200D\u2695\uFE0F'
   // true
 
+  // 集合标记法
+  // 差集
   console.log(/[\p{Decimal_Number}--[0-9]]/v.test('𑜹')); // true
   console.log(/[\p{Decimal_Number}--[0-9]]/v.test('4')); // false
 
+  // 交集
+  const re = /[\p{Script_Extensions=Greek}&&\p{Letter}]/v;
+  re.test('π'); // true
+  re.test('𐆊'); // false
+
+  // 并集
   const re3 = /^[\q{🇧🇪|abc}xyz0-9]$/v;
   console.log(re3.test('_')); // false
   console.log(re3.test('🇧🇪')); // true
@@ -76,6 +85,7 @@ function regexpWithVFlag() {
   console.log(re3.test('x')); // true
   console.log(re3.test('4')); // true
 
+  // 改进不区分大小写的匹配
   const re4 = /\p{Lowercase_Letter}/giu;
   const re5 = /[^\P{Lowercase_Letter}]/giu;
   const string = 'aAbBcC4#';
@@ -135,7 +145,7 @@ function resizableArrayBuffer() {
 window.es2024 = {
   wellFormedString,
   groupBy,
-  regexpWithVFlag,
+  regExpWithVFlag,
   transferArrayBuffer,
   resizableArrayBuffer
 }

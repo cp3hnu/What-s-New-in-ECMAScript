@@ -1,4 +1,4 @@
-import { executeCode } from '@/utils';
+import { displayLogs, executeCode } from '@/utils';
 import Editor, { type BeforeMount, type OnMount } from '@monaco-editor/react';
 import { Button } from 'antd';
 import { editor } from 'monaco-editor';
@@ -8,9 +8,16 @@ import './index.less';
 type CodeExecutionProps = {
   code: string;
   editorHeight?: number;
+  isAsync?: boolean;
+  awaitSeconds?: number;
 };
 
-function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
+function CodeExecution({
+  code,
+  editorHeight = 200,
+  isAsync,
+  awaitSeconds,
+}: CodeExecutionProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [result, setResult] = useState<string | undefined>('');
 
@@ -34,7 +41,13 @@ function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
     if (!editorRef.current) return;
     const value = editorRef.current.getValue();
     const result = executeCode(value);
-    setResult(result);
+    if (isAsync && awaitSeconds) {
+      setTimeout(() => {
+        setResult(displayLogs());
+      }, awaitSeconds * 1000);
+    } else {
+      setResult(result);
+    }
   };
 
   return (
