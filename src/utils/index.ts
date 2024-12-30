@@ -19,6 +19,26 @@ const formatLog = (log: any): string => {
   return String(log);
 };
 
+export const useExecuteCode = () => {
+  const [logs, setLogs] = useState<string[]>([]);
+
+  const executeCode = useCallback((code: string) => {
+    console.log = (...args) => {
+      setLogs((prev) => [...prev, args.map(formatLog).join(' ')]);
+      originalLog.apply(console, args);
+    };
+
+    setLogs([]);
+    try {
+      new Function(code)();
+    } catch (error) {
+      console.log('Error:', (error as Error).message);
+    }
+  }, []);
+
+  return [logs, executeCode] as const;
+};
+
 // 获取函数体
 export const getFunctionBody = (fn: () => void): string => {
   const fullCode = fn.toString();
@@ -40,7 +60,7 @@ export const getFunctionBody = (fn: () => void): string => {
 
 // 计算代码高度
 export const getCodeHeight = (code: string) => {
-  return code.split('\n').length * 20;
+  return code.split('\n').length * 18 + 18;
 };
 
 // 设置代码和高度
@@ -54,24 +74,4 @@ export const setCodeAndHeight = (esObject: { [key: string]: any }) => {
       }
     }
   }
-};
-
-export const useExecuteCode = () => {
-  const [logs, setLogs] = useState<string[]>([]);
-
-  const executeCode = useCallback((code: string) => {
-    console.log = (...args) => {
-      setLogs((prev) => [...prev, args.map(formatLog).join(' ')]);
-      originalLog.apply(console, args);
-    };
-
-    setLogs([]);
-    try {
-      new Function(code)();
-    } catch (error) {
-      console.log('Error:', (error as Error).message);
-    }
-  }, []);
-
-  return [logs, executeCode] as const;
 };
