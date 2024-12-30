@@ -18,7 +18,7 @@ function ES2021() {
       <h2>
         新增<code>Promise.any()</code>
       </h2>
-      <CodeExecution {...promiseAny} isAsync awaitSeconds={2} />
+      <CodeExecution {...promiseAny} />
 
       <h2>Logical Assignment Operators</h2>
       <CodeExecution {...logicalAssignment} />

@@ -10,7 +10,7 @@ function ES2017() {
       <h1>What&apos;s New in ECMAScript 2017</h1>
 
       <h2>Async Function</h2>
-      <CodeExecution {...asyncFunction} isAsync awaitSeconds={2} />
+      <CodeExecution {...asyncFunction} />
 
       <h2>Object</h2>
       <ul>

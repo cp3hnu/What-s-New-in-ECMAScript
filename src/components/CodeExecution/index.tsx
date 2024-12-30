@@ -1,25 +1,18 @@
-import { displayLogs, executeCode } from '@/utils';
+import { displayLogs, useExecuteCode } from '@/utils';
 import Editor, { type BeforeMount, type OnMount } from '@monaco-editor/react';
 import { Button } from 'antd';
 import { editor } from 'monaco-editor';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import './index.less';
 
 type CodeExecutionProps = {
   code: string;
-  editorHeight?: number;
-  isAsync?: boolean;
-  awaitSeconds?: number;
+  editorHeight?: number | string;
 };
 
-function CodeExecution({
-  code,
-  editorHeight = 200,
-  isAsync,
-  awaitSeconds,
-}: CodeExecutionProps) {
+function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const [result, setResult] = useState<string | undefined>('');
+  const [logs, executeCode] = useExecuteCode();
 
   const handleEditorWillMount: BeforeMount = (monaco) => {
     monaco.editor.defineTheme('myCustomTheme', {
@@ -40,19 +33,12 @@ function CodeExecution({
   const handleCodeExecute = () => {
     if (!editorRef.current) return;
     const value = editorRef.current.getValue();
-    const result = executeCode(value);
-    if (isAsync && awaitSeconds) {
-      setTimeout(() => {
-        setResult(displayLogs());
-      }, awaitSeconds * 1000);
-    } else {
-      setResult(result);
-    }
+    executeCode(value);
   };
 
   return (
     <div className="code-execution">
-      <div className="editor-container">
+      <div className="code-execution__editor">
         <Editor
           height={editorHeight}
           defaultLanguage="javascript"
@@ -67,10 +53,15 @@ function CodeExecution({
           }}
         />
       </div>
-      <Button type="primary" size="large" onClick={handleCodeExecute}>
+      <Button
+        className="code-execution__run-button"
+        type="primary"
+        size="large"
+        onClick={handleCodeExecute}
+      >
         运行
       </Button>
-      <div className="console">{result}</div>
+      <div className="code-execution__console">{displayLogs(logs)}</div>
     </div>
   );
 }

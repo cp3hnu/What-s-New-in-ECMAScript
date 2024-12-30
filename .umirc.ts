@@ -16,8 +16,11 @@ export default defineConfig({
   layout: {
     title: `What's New in ES`,
   },
+  npmClient: 'pnpm',
   base: base,
   publicPath: base,
+  headScripts: headScripts,
+  valtio: {},
   routes: [
     {
       path: '/',
@@ -27,6 +30,11 @@ export default defineConfig({
       name: '首页',
       path: '/home',
       component: './Home',
+    },
+    {
+      name: '演练场',
+      path: '/playground',
+      component: './Playground',
     },
     {
       name: '2016',
@@ -74,13 +82,4 @@ export default defineConfig({
       component: './2024',
     },
   ],
-  npmClient: 'pnpm',
-  headScripts: headScripts,
-  proxy: {
-    '/api/': {
-      target: 'http://192.0.0.100:8080',
-      changeOrigin: true,
-      pathRewrite: { '^/api': '' },
-    },
-  },
 });

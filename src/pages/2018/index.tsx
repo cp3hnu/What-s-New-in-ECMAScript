@@ -18,13 +18,13 @@ function ES2018() {
       <h2>
         新增<code>Promise.prototype.finally()</code>
       </h2>
-      <CodeExecution {...promiseFinally} isAsync awaitSeconds={2} />
+      <CodeExecution {...promiseFinally} />
 
       <h2>Rest/Spread Properties</h2>
       <CodeExecution {...restAndSpreadProperties} />
 
       <h2>Asynchronous Iteration</h2>
-      <CodeExecution {...asyncGenerator} isAsync awaitSeconds={5} />
+      <CodeExecution {...asyncGenerator} />
 
       <h2>New features related to regular expression</h2>
       <ul>

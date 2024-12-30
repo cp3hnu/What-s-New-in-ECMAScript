@@ -40,7 +40,7 @@ function ES2020() {
       <h2>
         新增<code>Promise.allSettled()</code>
       </h2>
-      <CodeExecution {...promiseAllSettled} isAsync awaitSeconds={2} />
+      <CodeExecution {...promiseAllSettled} />
 
       <h2>
         新增<code>BigInt</code>数据类型

@@ -3,7 +3,7 @@ async function asyncFunction() {
     const promise = new Promise(resolve => {
       setTimeout(() => {
         resolve(1024)
-      }, 2000)
+      }, 1000)
     })
     const result = await promise;
     return result

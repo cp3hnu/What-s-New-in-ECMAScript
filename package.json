@@ -17,6 +17,7 @@
     "@umijs/max": "^4.4.1",
     "antd": "^5.4.0",
     "classnames": "^2.5.1",
+    "dedent": "^1.5.3",
     "monaco-editor": "^0.52.2"
   },
   "devDependencies": {

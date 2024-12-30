@@ -1,17 +1,15 @@
-const logs: any[] = [];
+import { useCallback, useState } from 'react';
+
+// 保留原始的 console.log
 const originalLog = console.log;
-console.log = function (...args) {
-  logs.push(args.map(formatLog).join(' '));
-  originalLog.apply(console, args);
-};
 
 // 显示日志
-export function displayLogs() {
+export const displayLogs = (logs: readonly string[]) => {
   return logs.map((log) => '> ' + log).join('\n');
-}
+};
 
 // 格式化日志
-function formatLog(log: any): string {
+const formatLog = (log: any): string => {
   if (typeof log === 'object') {
     return JSON.stringify(log, null, 2)
       .split('\n')
@@ -19,19 +17,7 @@ function formatLog(log: any): string {
       .join('\n');
   }
   return String(log);
-}
-
-// 执行代码
-export function executeCode(code: string) {
-  logs.length = 0;
-  try {
-    new Function(code)();
-    return displayLogs();
-  } catch (error) {
-    console.log('Error:', (error as Error).message);
-    return displayLogs();
-  }
-}
+};
 
 // 获取函数体
 export const getFunctionBody = (fn: () => void): string => {
@@ -68,4 +54,24 @@ export const setCodeAndHeight = (esObject: { [key: string]: any }) => {
       }
     }
   }
+};
+
+export const useExecuteCode = () => {
+  const [logs, setLogs] = useState<string[]>([]);
+
+  const executeCode = useCallback((code: string) => {
+    console.log = (...args) => {
+      setLogs((prev) => [...prev, args.map(formatLog).join(' ')]);
+      originalLog.apply(console, args);
+    };
+
+    setLogs([]);
+    try {
+      new Function(code)();
+    } catch (error) {
+      console.log('Error:', (error as Error).message);
+    }
+  }, []);
+
+  return [logs, executeCode] as const;
 };

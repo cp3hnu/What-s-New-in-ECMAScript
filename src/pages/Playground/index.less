@@ -1,0 +1,34 @@
+.playground {
+  height: 100%;
+  width: 100%;
+
+  :global {
+    .code-execution {
+      border: none;
+      margin-bottom: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      align-items: flex-start;
+
+      &__editor {
+        flex: 1;
+        height: 100%;
+        background-color: #f0f0f0;
+      }
+
+      &__run-button {
+        margin: 0 20px;
+      }
+
+      &__console {
+        flex: 1;
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
+  }
+}
