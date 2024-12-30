@@ -40,6 +40,7 @@ function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
     <div className="code-execution">
       <div className="code-execution__editor">
         <Editor
+          width={'100%'}
           height={editorHeight}
           defaultLanguage="javascript"
           defaultValue={code}
