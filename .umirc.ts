@@ -1,4 +1,5 @@
 import { defineConfig } from '@umijs/max';
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
 const base =
   process.env.NODE_ENV === 'production' ? '/What-s-New-in-ECMAScript/' : '/';
@@ -8,6 +9,12 @@ const headScripts = new Array(9).fill(0).map((_, index) => ({
 }));
 
 export default defineConfig({
+  // 其他配置...
+  chainWebpack(memo) {
+    memo.plugin('monaco-editor').use(MonacoWebpackPlugin);
+    return memo;
+  },
+  esbuildMinifyIIFE: true,
   antd: {},
   access: {},
   model: {},
