@@ -32,7 +32,7 @@ export default defineConfig({
       component: './Home',
     },
     {
-      name: '演练场',
+      name: 'Playground',
       path: '/playground',
       component: './Playground',
     },

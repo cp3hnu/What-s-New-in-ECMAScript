@@ -1,9 +1,12 @@
 import { displayLogs, useExecuteCode } from '@/utils';
-import Editor, { type BeforeMount, type OnMount } from '@monaco-editor/react';
+import Editor, { loader, type BeforeMount, type OnMount } from '@monaco-editor/react';
 import { Button } from 'antd';
 import { editor } from 'monaco-editor';
 import { useRef } from 'react';
 import './index.less';
+import * as monaco from 'monaco-editor';
+
+loader.config({ monaco });
 
 type CodeExecutionProps = {
   code: string;
