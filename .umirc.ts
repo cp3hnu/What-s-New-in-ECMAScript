@@ -9,7 +9,6 @@ const headScripts = new Array(9).fill(0).map((_, index) => ({
 }));
 
 export default defineConfig({
-  // 其他配置...
   chainWebpack(memo) {
     memo.plugin('monaco-editor').use(MonacoWebpackPlugin);
     return memo;
