@@ -70,7 +70,8 @@ export const setCodeAndHeight = (esObject: { [key: string]: any }) => {
       const value = esObject[key];
       if (typeof value === 'function') {
         value.code = getFunctionBody(value);
-        value.editorHeight = getCodeHeight(value.code);
+        //value.editorHeight = getCodeHeight(value.code);
+        value.editorHeight = 'auto';
       }
     }
   }

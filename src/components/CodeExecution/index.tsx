@@ -2,16 +2,17 @@ import { displayLogs, useExecuteCode } from '@/utils';
 import Editor, { type BeforeMount, type OnMount } from '@monaco-editor/react';
 import { Button } from 'antd';
 import { editor } from 'monaco-editor';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './index.less';
 
 type CodeExecutionProps = {
   code: string;
-  editorHeight?: number | string;
+  editorHeight: 'auto' | number | string;
 };
 
-function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
+function CodeExecution({ code, editorHeight }: CodeExecutionProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const [editorActualHeight, setEditorActualHeight] = useState(50); // 初始高度
   const [logs, executeCode] = useExecuteCode();
 
   const handleEditorWillMount: BeforeMount = (monaco) => {
@@ -28,6 +29,20 @@ function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
     monaco.editor.setTheme('myCustomTheme');
+
+    if (editorHeight === 'auto') {
+      const updateHeight = () => {
+        const contentHeight = editor.getContentHeight();
+        setEditorActualHeight(contentHeight);
+        editor.layout(); // 触发重新布局
+      };
+
+      updateHeight(); // 初始化时调用
+
+      editor.onDidContentSizeChange(() => {
+        updateHeight();
+      });
+    }
   };
 
   const handleCodeExecute = () => {
@@ -41,7 +56,7 @@ function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
       <div className="code-execution__editor">
         <Editor
           width={'100%'}
-          height={editorHeight}
+          height={editorHeight === 'auto' ? editorActualHeight : editorHeight}
           defaultLanguage="javascript"
           defaultValue={code}
           beforeMount={handleEditorWillMount}
@@ -51,6 +66,15 @@ function CodeExecution({ code, editorHeight = 200 }: CodeExecutionProps) {
             minimap: {
               enabled: false,
             },
+            scrollBeyondLastLine: false,
+            scrollbar: {
+              alwaysConsumeMouseWheel: editorHeight === 'auto' ? false : true,
+              handleMouseWheel: editorHeight === 'auto' ? false : true,
+              vertical: editorHeight === 'auto' ? 'hidden' : 'auto',
+            },
+            overviewRulerLanes: 0, // 关闭 overview ruler
+            hideCursorInOverviewRuler: true, // 隐藏光标标记
+            automaticLayout: true,
           }}
         />
       </div>
