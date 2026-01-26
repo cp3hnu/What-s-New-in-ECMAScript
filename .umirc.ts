@@ -20,7 +20,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: `What's New in ES`,
+    title: `What's New in JS`,
   },
   npmClient: 'pnpm',
   base: base,
