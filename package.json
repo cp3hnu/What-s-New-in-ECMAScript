@@ -14,7 +14,7 @@
     "@ant-design/icons": "^5.5.2",
     "@ant-design/pro-components": "^2.4.4",
     "@monaco-editor/react": "^4.7.0",
-    "@umijs/max": "^4.4.1",
+    "@umijs/max": "^4.6.24",
     "antd": "^5.4.0",
     "classnames": "^2.5.1",
     "dedent": "^1.5.3",
