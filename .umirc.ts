@@ -1,8 +1,7 @@
 import { defineConfig } from '@umijs/max';
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
-const base =
-  process.env.NODE_ENV === 'production' ? '/What-s-New-in-ECMAScript/' : '/';
+const base = process.env.NODE_ENV === 'production' ? '/' : '/';
 
 const headScripts = new Array(9).fill(0).map((_, index) => ({
   src: `${base}js/${2016 + index}.js`,
@@ -88,5 +87,4 @@ export default defineConfig({
       component: './2024',
     },
   ],
-  esmi: false,
 });
