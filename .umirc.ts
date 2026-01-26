@@ -88,4 +88,5 @@ export default defineConfig({
       component: './2024',
     },
   ],
+  esmi: false,
 });
