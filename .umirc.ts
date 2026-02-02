@@ -3,7 +3,7 @@ import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
 const base = process.env.NODE_ENV === 'production' ? '/' : '/';
 
-const headScripts = new Array(9).fill(0).map((_, index) => ({
+const headScripts = new Array(10).fill(0).map((_, index) => ({
   src: `${base}js/${2016 + index}.js`,
 }));
 
@@ -85,6 +85,11 @@ export default defineConfig({
       name: '2024',
       path: '/2024',
       component: './2024',
+    },
+    {
+      name: '2025',
+      path: '/2025',
+      component: './2025',
     },
   ],
 });

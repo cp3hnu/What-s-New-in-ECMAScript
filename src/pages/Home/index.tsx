@@ -8,7 +8,10 @@ function Home() {
         ES2016 ~ ES2020 新特性
       </a>
       <a href="https://cp3hnu.github.io/2023/06/09/what-s-new-ecmascript-2/">
-        ES2021 ~ ES2025 新特性
+        ES2021 ~ ES2023 新特性
+      </a>
+      <a href="https://cp3hnu.github.io/2024/10/08/what-s-new-ecmascript-3/">
+        ES2024 ~ ES2025 新特性
       </a>
     </div>
   );
