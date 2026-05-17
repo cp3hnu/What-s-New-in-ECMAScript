@@ -2,7 +2,7 @@
   "private": true,
   "author": "cp3hnu <cp3hnu@gmail.com>",
   "scripts": {
-    "build": "umi build && cp dist/index.html dist/404.html",
+    "build": "max build && cp dist/index.html dist/404.html",
     "dev": "max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
